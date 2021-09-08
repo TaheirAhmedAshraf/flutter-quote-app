@@ -1,0 +1,54 @@
+import 'package:flutter/material.dart';
+import 'quote.dart';
+import "quote_card.dart";
+
+void main() {
+  runApp(MaterialApp(
+    home: QuoteList(),
+  ));
+}
+
+class QuoteList extends StatefulWidget {
+  @override
+  _QuoteListState createState() => _QuoteListState();
+}
+
+class _QuoteListState extends State<QuoteList> {
+  List quotes = [
+    Quote(
+        author: 'Osca Wilder',
+        text: "Be yourself; everyone else is already taken"),
+    Quote(
+        author: 'Osca Wilder',
+        text: "I have nothing to declare except my genius"),
+    Quote(
+        author: 'Osca Wilder',
+        text: "The truth is rarely pure and never simple")
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.grey[200],
+      appBar: AppBar(
+        title: Text(
+          "Awesome Quotes",
+        ),
+        backgroundColor: Colors.redAccent,
+        centerTitle: true,
+      ),
+      body: Column(
+        children: quotes
+            .map((quote) => QuoteCard(
+                  quote: quote,
+                  delete: () {
+                    setState(() {
+                      quotes.remove(quote);
+                    });
+                  },
+                ))
+            .toList(),
+      ),
+    );
+  }
+}
